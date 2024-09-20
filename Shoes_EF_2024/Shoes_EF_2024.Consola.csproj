@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ConsoleTables" Version="2.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shoes_EF_2024.Datos\Shoes_EF_2024.Datos.csproj" />
+    <ProjectReference Include="..\Shoes_EF_2024.loc\Shoes_EF_2024.loc.csproj" />
+    <ProjectReference Include="..\Shoes_EF_2024.Servicios\Shoes_EF_2024.Servicios.csproj" />
+    <ProjectReference Include="..\Shoes_EF_2024.Shared\Shoes_EF_2024.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

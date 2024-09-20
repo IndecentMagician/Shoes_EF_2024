@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Shoes EF 2024 - Home One
+  </title>
+  <meta name="author" content="BostonJoker">
+  <meta name="description" content="BostonJoker - EF MVC 2024">
+  <meta name="keywords" content="BostonJoker - EF MVC 2024">
+  <meta name="robots" content="INDEX,FOLLOW">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+  <link rel="apple-touch-icon" sizes="57x57" href="assets/img/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="assets/img/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="assets/img/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicons/apple-icon-76x76.png">  
+  <link rel="apple-touch-icon" sizes="114x114" href="assets/img/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/img/favicons/apple-icon-120x120.png">  
+  <link rel="apple-touch-icon" sizes="144x144" href="assets/img/favicons/apple-icon-144x144.png">  
+  <link rel="apple-touch-icon" sizes="152x152" href="assets/img/favicons/apple-icon-152x152.png">  
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-icon-180x180.png">  
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicons/android-icon-192x192.png">  
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">  
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicons/favicon-96x96.png">  
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+
+  <link rel="manifest" href="assets/img/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="assets/img/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/app.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+    <body>
+        <div class="cursor"></div>
+        <div class="preloader">
+            <button class="th-btn preloaderCls">CANCEL PRELOADER</button>
+            <div class="preloader-inner"><span class="loader"></span></div>
+        </div>
+
+        <!--SIDE BLOCK -->
+        @RenderSection("SideBox", required: false)
+        <!---EN SIDE BLOCK! - cart -->
+        <!-- SEARCHBOX POP -->
+        @RenderSection("SearchBox", required: false)
+        <!-- SEARCHBOX POP -->
+        @RenderSection("ColorSwitcher", required: false)
+
+        <header class="th-header header-layout1">
+            <div class="header-top">
+                <div class="container">
+                    <div class="row justify-content-center justify-content-lg-between align-items-center gy-2">
+                        <div class="col-auto d-none d-lg-block">
+                            <p class="header-notice"></p>
+                            <div class="header-links">
+                                <ul>
+                                    <li>
+                                        <div class="header-notice">Welcome to our <a href="index.html">Shoe's</a> MVC 2024</div>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-link">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-globe"></i> English</a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                                                <li><a href="#">French</a> <a href="#">Spanish</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="header-links">
+                                <ul>
+                                    <li><a href="https://www.facebook.com/">Facebook</a></li>
+                                    <li><a href="https://www.twitter.com/">Twitter</a></li>
+                                    <li><a href="https://www.pinterest.com/">Pinterest</a></li>
+                                    <li><a href="https://www.instagram.com/">Instagram</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        @RenderSection("StikyWapper", required: false)
+        </header>
+        <!-- Fin layout -->
+        <!-- inicio index-content-home -->
+
+        <!-- HERO BANNER -->
+        @RenderSection("Header", required: false)
+        <!-- fin HERO BANNER -->
+
+        <!-- Slider top banner -->
+        @RenderSection("SliderTop", required: false)
+        <!-- fin Slider -->
+
+
+    <!-- Contenido Principal -->
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Footer -->
+    @RenderSection("Footer", required: false)
+
+    <!-- Sección de Scripts específicos por página -->
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

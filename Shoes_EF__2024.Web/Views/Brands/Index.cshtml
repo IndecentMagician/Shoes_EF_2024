@@ -1,0 +1,125 @@
+﻿@using Shoes_EF_2024.Web.ViewModels.Brands
+@model IPagedList<BrandListVm>
+@using X.PagedList
+@using X.Web.PagedList
+
+@{
+    ViewData["Title"] = "Brand List";
+}
+@section Header {
+    @Html.Partial("_Header")
+}
+@section ColorSwitcher {
+    @Html.Partial("_ColorSwitcher")
+}
+@section SearchBox {
+    @Html.Partial("_SearchBox")
+}
+@section SideBox {
+    @Html.Partial("_SideBox")
+}
+@section StikyWapper {
+    @Html.Partial("_StickyWapper")
+}
+
+@Html.AntiForgeryToken()
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-6">
+            <h3>Brand List</h3>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Brands" asp-action="UpSert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Nuevo
+            </a>
+        </div>
+    </div>
+    <form method="get" class="form-inline" asp-action="Index">
+        <div class="d-flex flex-row align-items-center">
+            <div class="col-auto mx-1">
+                <label for="pageSize">Show:</label>
+            </div>
+            <div class="col-auto mx-2">
+                <select class="form-select" id="pageSize" name="pageSize" onchange="this.form.submit()" style="width:70px">
+                    @{
+                        var options = new List<int> { 5, 10, 15, 20 };
+                        foreach (var option in options)
+                        {
+                            if (ViewBag.currentPageSize == option)
+                            {
+                                            <option selected value="@option">@option</option>
+                            }
+                            else
+                            {
+                                            <option value="@option">@option</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-auto mx-2" style="width: 200px;">
+                <input type="text" name="searchTerm" id="searchTerm" class="form-control" placeholder="Search by..." value="@ViewBag.currentSearchTerm" />
+            </div>
+            <div class="col-auto d-flex">
+                <button type="submit" class="btn btn-primary mx-2">
+                    <i class="bi bi-search"></i> Search
+                </button>
+                <button type="submit" class="btn btn-secondary" id="viewAll" name="viewAll" value="true">
+                    <i class="bi bi-list"></i> View All
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="table-responsive">
+    <table class="table tournament-table">
+        <thead>
+            <tr>
+                <th style="width:33%">Brand Name</th>
+                <th style="width:33%">Prod.Qty</th>
+                <th style="width:33%">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var brand in Model)
+                {
+                            <tr>
+                                <td class="text-center">@brand.BrandName</td>
+                                <td class="text-center">@brand.shoesQuantity</td>
+                                <td class="text-center">
+                                    <a class="btn btn-warning" asp-controller="Brands" asp-action="UpSert" asp-route-id="@brand.BrandId">
+                                        <i class="bi bi-pencil-square"></i>&nbsp; Edit
+                                    </a>
+                                    <a onclick="Delete('/Brands/Delete/@brand.BrandId',@brand.BrandId,'@brand.BrandName')" class="btn btn-danger">
+                                        <i class="bi bi-trash-fill"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                }
+            }
+            else
+            {
+                    <tr>
+                        <td colspan="3" class="text-center">
+                            No brands have been added yet!
+                        </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="_Pager" model="@Model" />
+    </div>
+        <div class="scroll-top">
+            <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;"></path>
+            </svg>
+
+
+        @section Footer {
+            @Html.Partial("_Footer")
+        }
+
+        @section Scripts {
+            @Html.Partial("_Scripts")
+        }

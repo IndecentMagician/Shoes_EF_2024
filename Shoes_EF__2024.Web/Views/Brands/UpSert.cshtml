@@ -1,0 +1,22 @@
+﻿@model BrandEditVm;
+@{
+    Layout = "_LayoutDash";
+}
+@{
+    ViewData["Title"] = Model.BrandId == 0 ? "Add New Shoe" : "Edit Shoe";
+}
+
+@Html.AntiForgeryToken()
+<div class="container">
+<form asp-action="UpSert" method="post" enctype="multipart/form-data" class="contact-form ajax-contact pb-xl-0 space-bottom">
+  <div class="row">
+    <div class="form-group style-border2 col-md-6">
+      <input type="hidden" asp-for="BrandId" />
+      <label asp-for="BrandName"></label>
+      <input asp-for="BrandName" class="form-control" />
+      <span asp-validation-for="BrandName" class="text-danger"></span>   
+
+    </div>
+
+<button type="submit" class="btn btn-primary">@(Model.BrandId == 0 ? "Create" : "Update")</button>
+</form>   

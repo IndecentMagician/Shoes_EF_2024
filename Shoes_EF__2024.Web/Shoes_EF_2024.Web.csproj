@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="X.Web.PagedList" Version="10.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shoes_EF_2024.Entidades\Shoes_EF_2024.Entidades.csproj" />
+    <ProjectReference Include="..\Shoes_EF_2024.loc\Shoes_EF_2024.loc.csproj" />
+    <ProjectReference Include="..\Shoes_EF_2024.Servicios\Shoes_EF_2024.Servicios.csproj" />
+  </ItemGroup>
+
+
+</Project>

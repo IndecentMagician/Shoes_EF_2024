@@ -1,0 +1,171 @@
+﻿@using Shoes_EF_2024.Web.ViewModels.Shoes;
+@model ShoeFilterVm;
+@using X.PagedList
+@using X.Web.PagedList
+
+@Html.AntiForgeryToken()
+
+@{
+    ViewData["Title"] = "Shoes List";
+}
+
+@section Header {
+    @Html.Partial("_Header")
+}
+@section ColorSwitcher {
+    @Html.Partial("_ColorSwitcher")
+}
+@section SearchBox {
+    @Html.Partial("_SearchBox")
+}
+@section SideBox {
+    @Html.Partial("_SideBox")
+}
+@section StikyWapper {
+    @Html.Partial("_StickyWapper")
+}
+
+<div class="container">
+    @Html.AntiForgeryToken()
+            <div class="col-6 text-end">
+            <a asp-controller="Shoes" asp-action="UpSert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>
+                Nuevo
+            </a>
+        </div>
+
+    <form method="get" class="form-inline" asp-action="Index">
+        <div class="d-flex flex-row align-items-center">
+            <div class="col-auto mx-1">
+                <label for="pageSize">Show:</label>
+            </div>
+            <div class="col-auto mx-2">
+                <partial name="_SelectPaginas" model="@ViewBag.currentPageSize" />
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                <select class="form-select" name="FilterBrandId" id="FilterBrandId" >
+                    <option disabled selected value="0">Select Brand</option>
+                    @{
+                        foreach (var item in Model.Brands!)
+                        {
+                            if (ViewBag.BrandFilterId == int.Parse(item.Value))
+                            {
+                                                        <option selected value="@item.Value">@item.Text</option>
+                            }
+                            else
+                            {
+                                                        <option value="@item.Value">@item.Text</option>
+                            }
+                        }
+                    }
+                </select>
+                </div>
+                <div class="col-md-4">
+                 <select class="form-select" name="FilterSportId" id="FilterSportId" >
+                    <option disabled selected value="0">Select Sport</option>
+                    @{
+                        foreach (var item in Model.Sports!)
+                        {
+                            if (ViewBag.SportFilterId == int.Parse(item.Value))
+                            {
+                                                                    <option selected value="@item.Value">@item.Text</option>
+                            }
+                            else
+                            {
+                                                                    <option value="@item.Value">@item.Text</option>
+                            }
+                        }
+                    }
+                </select>
+                 </div>
+                <div class="col-md-4">
+                <select class="form-select" name="FilterGendreId" id="FilterGendreId" >
+                    <option disabled selected value="0">Select Genre</option>
+                    @{
+                        foreach (var item in Model.Genres!)
+                        {
+                            if (ViewBag.GenreFilterId == int.Parse(item.Value))
+                            {
+                                                                    <option selected value="@item.Value">@item.Text</option>
+                            }
+                            else
+                            {
+                                                                    <option value="@item.Value">@item.Text</option>
+                            }
+                        }
+                    }
+                </select>
+                 </div>
+            </div>
+            <div class="col-auto d-flex">
+                <button type="submit" class="btn btn-primary mx-2">
+                    <i class="bi bi-search"></i> Search
+                </button>
+                <button type="submit" class="btn btn-secondary" id="viewAll" name="viewAll" value="true">
+                    <i class="bi bi-list"></i> View All
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="table-responsive">    <table class="table tournament-table">
+        <thead>
+            <tr>
+                <th style="width:20%">Model</th>
+                <th style="width:20%">Brand</th>
+                <th style="width:14%">Sport</th>
+                <th style="width:8%">Price</th>
+                <th style="width:8%">Stock</th>
+                <th style="width:10%">Suspended</th>
+                <th style="width:20%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+                @if (Model.Shoes!.Any())
+                {
+                    foreach (var item in Model.Shoes!)
+                    {
+                                        <tr id="@item.ShoeId">
+                                        <td style="text-align:center"> @item.Model</td>
+                                        <td style="text-align:center"> @item.BrandName</td>
+                                        <td style="text-align:center"> @item.SportName</td>
+                                        <td style="text-align:right">@item.UnitPrice.ToString("C2")</td>
+                                        <td style ="text-align:right"> @item.Stock</td>
+                                        
+                                        <td> <input type="checkbox" asp-for="@item.Suspended" disabled /></td>
+                                        <td> <a class="btn btn-warning" asp-controller="Shoes" asp-action="UpSert" asp-route-id="@item.ShoeId">
+                                            <i class="bi bi-pencil-square"></i>&nbsp;Edit</a>
+                                            <a onclick="Delete('/Shoes/Delete/@item.ShoeId',@item.ShoeId)" class="btn btn-danger">
+                                        <i class="bi bi-trash-fill"></i> Delete</a> </td>
+                                        </tr>
+                    }
+                }
+                else
+                {
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                F?uck!!! No Shoes have been added yet!
+
+                            </td>
+                        </tr>
+
+                }
+        </tbody>
+    </table>
+    </div>
+
+        
+    <partial name="_Pager" model="@Model.Shoes" />
+
+
+</div>
+<!-- Incluir la sección de Footer -->
+@section Footer {
+    @Html.Partial("_Footer")
+}
+
+<!-- Incluir scripts adicionales si es necesario -->
+@section Scripts {
+    @Html.Partial("_Scripts")
+}

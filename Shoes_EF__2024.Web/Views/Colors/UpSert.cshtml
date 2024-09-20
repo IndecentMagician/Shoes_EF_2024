@@ -1,0 +1,28 @@
+﻿@model ColorEditVm;
+@{
+    Layout = "_LayoutDash";
+}
+
+@{
+    ViewData["Title"] = Model.ColorId == 0 ? "Add New Color" : "Edit Color";
+}
+
+
+@Html.AntiForgeryToken()
+<div class="container">
+<form asp-action="UpSert" method="post" enctype="multipart/form-data" class="contact-form ajax-contact pb-xl-0 space-bottom">
+  <div class="row">
+    <div class="form-group style-border2 col-md-6">
+      <label asp-for="ColorName"></label>
+      <input type="hidden" asp-for="ColorId" />
+      <input asp-for="ColorName" class="form-control" />
+      <span asp-validation-for="ColorName" class="text-danger"></span>   
+
+    </div>
+
+<button type="submit" class="btn btn-primary">@(Model.ColorId == 0 ? "Create" : "Update")</button>
+</form>   
+
+
+</div>
+

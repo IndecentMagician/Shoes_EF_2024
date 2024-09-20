@@ -1,0 +1,299 @@
+﻿
+@{
+    ViewData["Title"] = "Home";
+}
+
+@section Header {
+    @Html.Partial("_Header")
+}
+@section ColorSwitcher {
+    @Html.Partial("_ColorSwitcher")
+}
+@section SearchBox {
+    @Html.Partial("_SearchBox")
+}
+@section SideBox {
+    @Html.Partial("_SideBox")
+}
+@section StikyWapper {
+    @Html.Partial("_StickyWapper")
+}
+@Html.Partial("_SliderTopBannerHome")
+
+        <div class="marquee-area-1 bg-repeat overflow-hidden" data-bg-src="assets/img/bg/jiji-bg.png">
+            <div class="container-fluid">
+                <div class="swiper th-slider" id="marqueeSlider1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":"auto"}},"autoplay":{"delay":1500,"disableOnInteraction":false},"spaceBetween":50}'>
+                    <div class="swiper-wrapper">
+
+                      <!--- Marquecina Foreach Brands Name-->
+                        <div class="marquee-item swiper-slide">
+                            <div class="marquee_icon"><img src="assets/img/normal/star.png" alt="Icon" /></div>
+                            <h3 class="marquee-title"><a href="service-details.html">GAMING SPANING</a></h3>
+                        </div>
+                        <!--- Marquecina end foreach Brands Name-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- homeBrands -->
+
+        <div class="overflow-hidden space" id="about-sec">
+            <div class="about-bg-img shape-mockup" data-top="0" data-left="0"><img src="assets/img/bg/about-bg1.png" alt="img" /></div>
+
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-6 mb-50 mb-xl-0">
+                        <div class="img-box1">
+                            <div class="img1 custom-anim-left wow animated" data-wow-duration="1.5s" data-wow-delay="0.2s"><img src="assets/img/normal/about1-1.png" alt="About" /></div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <div class="about-wrap1">
+                            <div class="about-title-wrap mb-n1">
+                                <div class="about-title-thumb custom-anim-top wow animated" data-wow-duration="1.5s" data-wow-delay="0.1s"><img src="assets/img/normal/about1-2.png" alt="img" /></div>
+
+                                <div class="title-area custom-anim-left wow animated" data-wow-duration="1.5s" data-wow-delay="0.1s">
+                                    <span class="sub-title"># About Shoe's EF Core MVC - ASP RAZOR </span>
+                                    <h2 class="sec-title mb-0">TP: 2024</h2>
+                                </div>
+                            </div>
+
+                            <div class="about-grid">
+                                <div class="icon custom-anim-top wow animated" data-wow-duration="1.5s" data-wow-delay="0.2s"><img src="assets/img/icon/about_feature_1.svg" alt="img" /></div>
+
+                                <div class="about-grid-details custom-anim-left wow animated" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                                    <h3 class="about-grid_title h5">
+                                        Over
+
+                                        <span class="text-theme">d </span> Affiliate dev Programs
+                                    </h3>
+
+                                    <p class="about-grid_text">Keep users informed about the industry with news articles on releases, updates, and events.</p>
+                                </div>
+                            </div>
+
+                            <div class="about-grid">
+                                <div class="icon custom-anim-top wow animated" data-wow-duration="1.5s" data-wow-delay="0.2s"><img src="assets/img/icon/about_feature_2.svg" alt="img" /></div>
+
+                                <div class="about-grid-details custom-anim-left wow animated" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                                    <h3 class="about-grid_title h5">Great Tournaments</h3>
+
+                                    <p class="about-grid_text">Display a calendar of upcoming tournaments with dates, times, and Shoes titles and provide live updates.</p>
+                                </div>
+                            </div>
+
+                            <div class="about-grid">
+                                <div class="icon custom-anim-top wow animated" data-wow-duration="1.5s" data-wow-delay="0.2s"><img src="assets/img/icon/about_feature_3.svg" alt="img" /></div>
+
+                                <div class="about-grid-details custom-anim-left wow animated" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                                    <h3 class="about-grid_title h5">Get Online Supports</h3>
+
+                                    <p class="about-grid_text">Create profiles for professional esports players, including their bios, achievements, and current teams.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="overflow-hidden">
+            <div class="container th-container2">
+                <div class="Shoes-sec-wrap1 space" data-bg-src="assets/img/bg/Shoes-sec1-bg.png">
+                    <div class="title-area text-center custom-anim-top wow animated" data-wow-duration="1.5s" data-wow-delay="0.1s">
+                        <span class="sub-title"># Releases The Latest Game </span>
+                        <h2 class="sec-title">
+                            Game On, Power Up, Win Big
+
+                            <span class="text-theme">! </span>
+                        </h2>
+                    </div>
+
+                    <div class="slider-area">
+                        <div
+                            class="swiper th-slider Shoes-slider-1"
+                            id="ShoesSlider1"
+                            data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"3"},"1200":{"slidesPerView":"4"}}}'>
+                            <!---
+                            Start FOREACH SLIDER Brands
+                            --->
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="Shoes-card gradient-border">
+                                        <div class="Shoes-card-img">
+                                            <a href="tournament-details.html"><img src="assets/img/Shoes/1-1.png" alt="Shoes image" /></a>
+
+                                            <div class="Shoes-logo"><img src="assets/img/Shoes/logo1-1.png" alt="Shoes logo" /></div>
+                                        </div>
+
+                                        <div class="Shoes-card-details">
+                                            <h3 class="box-title"><a href="tournament-details.html">BrandName</a></h3>
+
+                                            <p class="Shoes-content">
+                                                Stock:
+
+                                                <span class="text-theme">Qt. in Stock</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!---
+                                END FOREACH SLIDER Brands
+                                --->
+                            </div>
+
+                            <div class="slider-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="team-sec-1 space">
+            <div class="team-shape1-1 shape-mockup" data-top="0" data-right="0"><img src="assets/img/bg/team-sec1-bg.png" alt="img" /></div>
+
+            <div class="container th-container3">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6 col-lg-7 col-md-8">
+                        <div class="title-area text-center custom-anim-top wow animated" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                            <span class="sub-title"># Top World Class Athlete </span>
+                            <h2 class="sec-title">Let’s See Our Pro Players</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container th-container4">
+            <div class="cta-area-1">
+                <div class="cta-bg-shape-border">
+                    <svg width="1464" height="564" viewBox="0 0 1464 564" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M1463.5 30V534C1463.5 550.292 1450.29 563.5 1434 563.5H1098H927.426C919.603 563.5 912.099 560.392 906.567 554.86L884.14 532.433C878.42 526.713 870.663 523.5 862.574 523.5H601.426C593.337 523.5 585.58 526.713 579.86 532.433L557.433 554.86C551.901 560.392 544.397 563.5 536.574 563.5H366H30C13.7076 563.5 0.5 550.292 0.5 534V30C0.5 13.7076 13.7076 0.5 30 0.5H366H536.574C544.397 0.5 551.901 3.60802 557.433 9.14034L579.86 31.5668C585.58 37.2866 593.337 40.5 601.426 40.5H862.574C870.663 40.5 878.42 37.2866 884.14 31.5668L906.567 9.14035C912.099 3.60803 919.603 0.5 927.426 0.5H1098H1434C1450.29 0.5 1463.5 13.7076 1463.5 30Z"
+                            stroke="url(#paint0_linear_202_547)"
+                        />
+                        <defs>
+                            <linearGradient id="paint0_linear_202_547" x1="0" y1="0" x2="1505.47" y2="412.762" gradientUnits="userSpaceOnUse">
+                                <stop offset="0" stop-color="var(--theme-color)" />
+                                <stop offset="1" stop-color="var(--theme-color2)" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+
+                <div class="cta-wrap-bg bg-repeat" data-bg-src="assets/img/bg/jiji-bg.png" data-mask-src="assets/img/shape/cta-bg-shape1.svg">
+                    <div class="cta-bg-img"><img src="assets/img/bg/cta-sec1-bg.png" alt="img" /></div>
+
+                    <div class="cta-thumb"><img src="assets/img/normal/cta1-1.png" alt="img" /></div>
+                </div>
+
+                <div class="cta-wrap">
+                    <div class="row">
+                        <div class="col-xl-5">
+                            <div class="title-area mb-0 custom-anim-left wow animated" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                                <span class="sub-title"># World Best Sport Site </span>
+                                <h2 class="sec-title">
+                                    Join Shoes Esports to Become Next
+
+                                    <span class="text-theme fw-medium">PRO Athlete Today ! </span>
+                                </h2>
+
+                                <p class="mt-30 mb-30">
+                                    Esports and gaming facilities requires thoughtful consideration of various elements to create an environment that caters to the needs of Shoesrs and enhances the overall gaming experience.
+                                </p>
+                                <a href="contact.html" class="th-btn">JOIN COMMUNITY <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="space">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-md-auto">
+                        <div class="title-area custom-anim-left wow animated text-md-start text-center" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                            <span class="sub-title"># Athlete Shop </span>
+                            <h2 class="sec-title">
+                                Our Latest Sport Products
+
+                                <span class="text-theme">! </span>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="col-md-auto d-none d-md-block">
+                        <div class="sec-btn">
+                            <div class="icon-box">
+                                <button data-slider-prev="#productSlider1" class="slider-arrow style2 default"><i class="far fa-arrow-left"></i></button>
+                                <button data-slider-next="#productSlider1" class="slider-arrow style2 default"><i class="far fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---
+                Productos
+                --->
+
+                <div
+                    class="swiper th-slider has-shadow"
+                    id="productSlider1"
+                    data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"2"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"3"},"1200":{"slidesPerView":"4"}}}'>
+                    <div class="swiper-wrapper">
+                      <!---
+                      END FOREACH Productos
+                      --->
+                        <div class="swiper-slide">
+                            <div class="th-product product-grid">
+                                <div class="product-img">
+                                    <img src="assets/img/product/product_1_6.png" alt="Product Image" />
+
+                                    <div class="overlay gradient-border"></div>
+
+                                    <div class="actions">
+                                        <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a> <a href="wishlist.html" class="icon-btn"><i class="fas fa-heart"></i></a>
+                                        <a href="#QuickView" class="icon-btn popup-content"><i class="fas fa-eye"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="product-content">
+                                    <h3 class="product-title"><a href="shop-details.html">Play Station Controller</a></h3>
+
+                                    <span class="price">$30.85 </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!---
+                        END FOREACH Product
+                        --->
+                    </div>
+                </div>
+                <!---
+                Productos
+                --->
+                <div class="d-block d-md-none mt-40 text-center">
+                    <div class="icon-box">
+                        <button data-slider-prev="#productSlider1" class="slider-arrow style2 default"><i class="far fa-arrow-left"></i></button>
+                        <button data-slider-next="#productSlider1" class="slider-arrow style2 default"><i class="far fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <div class="scroll-top">
+            <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;"></path>
+            </svg>
+
+
+@section Footer {
+    @Html.Partial("_Footer")
+}
+
+@section Scripts {
+    @Html.Partial("_Scripts")
+}
+
