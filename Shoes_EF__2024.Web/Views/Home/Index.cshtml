@@ -293,7 +293,13 @@
     @Html.Partial("_Footer")
 }
 
-@section Scripts {
-    @Html.Partial("_Scripts")
-}
+    @section Scripts {
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+            <script src="~/js/common.js"></script>
+            <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
+            <script src="assets/js/app.min.js"></script>
+            <script src="assets/js/main.js"></script>
+            <partial name="_ValidationScriptsPartial" />
+    }
 

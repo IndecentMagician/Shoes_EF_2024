@@ -91,9 +91,8 @@
                                     <a class="btn btn-warning" asp-controller="Brands" asp-action="UpSert" asp-route-id="@brand.BrandId">
                                         <i class="bi bi-pencil-square"></i>&nbsp; Edit
                                     </a>
-                                    <a onclick="Delete('/Brands/Delete/@brand.BrandId',@brand.BrandId,'@brand.BrandName')" class="btn btn-danger">
-                                        <i class="bi bi-trash-fill"></i> Delete
-                                    </a>
+                                                     <a onclick="Delete('/Brands/Delete/@brand.BrandId', @brand.BrandId)" class="btn btn-danger">
+                                                         <i class="bi bi-trash-fill"></i> Delete</a>
                                 </td>
                             </tr>
                 }
@@ -121,5 +120,10 @@
         }
 
         @section Scripts {
-            @Html.Partial("_Scripts")
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+            <script src="~/js/common.js"></script>
+            <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
+            <script src="assets/js/app.min.js"></script>
+            <script src="assets/js/main.js"></script>
         }

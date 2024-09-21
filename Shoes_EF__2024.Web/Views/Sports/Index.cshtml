@@ -91,13 +91,11 @@
                                                 <td class="text-center">@sports.SportName</td>
                                                 <td class="text-center">@sports.shoesQuantity</td>
                                                 <td class="text-center">
-                                                    <a class="btn btn-warning" asp-controller="Sports" asp-action="UpSert" asp-route-id="@sports.SportId">
-                                                        <i class="bi bi-pencil-square"></i>&nbsp; Edit
-                                                    </a>
-                                                    <a onclick="Delete('/Sports/Delete/@sports.SportId',@sports.SportId,'@sports.SportName')" class="btn btn-danger">
-                                                        <i class="bi bi-trash-fill"></i> Delete
-                                                    </a>
-                                                </td>
+                                                <a class="btn btn-warning" asp-controller="Sports" asp-action="UpSert" asp-route-id="@sports.SportId">
+                                                    <i class="bi bi-pencil-square"></i>&nbsp;Edit</a>
+                                    <a onclick="Delete('/Sports/Delete/@sports.SportId',@sports.SportId,'@sports.SportName')" class="btn btn-danger">
+                                        <i class="bi bi-trash-fill"></i>Delete</a>
+                                        </td>
                                             </tr>
                     }
                 }
