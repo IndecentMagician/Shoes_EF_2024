@@ -4,6 +4,8 @@ using Shoes_EF_2024.Entidades;
 using Shoes_EF_2024.Servicios.Interfaces;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+
+
 namespace Shoes_EF_2024.Servicios.Services
 {
     public class ServiceColors : IServiceColors
@@ -54,16 +56,16 @@ namespace Shoes_EF_2024.Servicios.Services
 
         public void Delete(Colors color)
         {
-            var ColorInDb = _context.Colors.Find(color.ColorId);
-            if (ColorInDb != null)
+            try
             {
-                _context.Colors.Remove(ColorInDb);
-                _context.SaveChanges();
-                Console.WriteLine($"Marca {ColorInDb.ColorName} Eliminada");
+                _unitOfWork.BeginTransaction();
+                _repo.Delete(color);
+                _unitOfWork.Commit();
             }
-            else
+            catch (Exception)
             {
-                Console.WriteLine("Marca no existe");
+                _unitOfWork.Rollback();
+                throw;
             }
         }
 

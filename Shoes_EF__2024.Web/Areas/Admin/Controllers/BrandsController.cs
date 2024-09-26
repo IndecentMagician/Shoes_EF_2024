@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Http;
 using X.PagedList.Extensions;
 using Shoes_EF_2024.Web.ViewModels.Colors;
 
-namespace Shoes_EF_2024.Web.Controllers
+namespace Shoes_EF_2024.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class BrandsController : Controller
     {
         private readonly IServiceBrands _brandsService;
@@ -107,31 +108,33 @@ namespace Shoes_EF_2024.Web.Controllers
         }
 
         [HttpPost]
+        [HttpDelete]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            if (id is null || id == 0)
             {
                 return NotFound();
             }
-            var brand = _brandsService.Get(filter: c => c.BrandId == id);
-            if (brand == null)
+            Brands? _brand = _brandsService?.Get(filter: s => s.BrandId == id);
+            if (_brand is null)
             {
                 return NotFound();
             }
             try
             {
-                if (_brandsService.ItsRelated(brand.BrandId))
+                if (_brandsService!.ItsRelated(_brand.BrandId))
                 {
-                    return Json(new { success = false, message = "Related record... Delete denied!" });
+                    return Json(new { success = false, message = "Related Record... Delete Deny!!" }); ;
                 }
-
-                _brandsService.Delete(brand);
+                _brandsService.Delete(_brand);
                 return Json(new { success = true, message = "Record successfully deleted" });
             }
             catch (Exception)
             {
-                return Json(new { success = false, message = "Couldn't delete the record!" });
+
+                return Json(new { success = false, message = "Couldn't delete record!!! " }); ;
+
             }
         }
 

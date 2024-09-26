@@ -3,7 +3,7 @@ using Shoes_EF_2024.Entidades;
 using Shoes_EF_2024.Servicios.Interfaces;
 using System.Linq.Expressions;
 
-namespace Shoes_EF_2024.Servicios.Servicios
+namespace Shoes_EF_2024.Servicios.Services
 {
     public class ServiceGenres : IServiceGenres
     {

@@ -6,19 +6,20 @@ using X.PagedList;
 using Shoes_EF_2024.Web.ViewModels.Shoes;
 using Microsoft.AspNetCore.Http;
 using X.PagedList.Extensions;
-using Shoes_EF_2024.Web.ViewModels.Colors;
+using Shoes_EF_2024.Web.ViewModels.Genres;
 
-namespace Shoes_EF_2024.Web.Controllers
+namespace Shoes_EF_2024.Web.Areas.Admin.Controllers
 {
-    public class ColorsController : Controller
+    [Area("Admin")]
+    public class GenresController : Controller
     {
-        private readonly IServiceColors _colorService;
+        private readonly IServiceGenres _genresService;
         private readonly IServiceShoes _shoesService;
         private readonly IMapper _mapper;
 
-        public ColorsController(IServiceColors colorService, IServiceShoes shoesService, IMapper mapper)
+        public GenresController(IServiceGenres genresService, IServiceShoes shoesService, IMapper mapper)
         {
-            _colorService = colorService ?? throw new ApplicationException("Dependencies not set");
+            _genresService = genresService ?? throw new ApplicationException("Dependencies not set");
             _shoesService = shoesService ?? throw new ApplicationException("Dependencies not set");
             _mapper = mapper ?? throw new ApplicationException("Dependencies not set");
         }
@@ -29,16 +30,16 @@ namespace Shoes_EF_2024.Web.Controllers
             {
                 var currentPage = page ?? 1;
 
-                var colorList = _colorService.GetAll();
+                var genres = _genresService.GetAll();
 
-                var colorsListVm = colorList.Select(b => new ColorlistVm
+                var genresListVm = genres.Select(b => new GenrelistVm
                 {
-                    ColorId = b.ColorId,
-                    ColorName = b.ColorName,
-                    shoesQuantity = _shoesService.GetAll(filter: s => s.ColorID == b.ColorId).Count()
+                    GenreId = b.GenreId,
+                    GenreName = b.GenreName,
+                    shoesQuantity = _shoesService.GetAll(filter: s => s.GenreId == b.GenreId).Count()
                 }).ToList();
 
-                var pagedList = colorsListVm.ToPagedList(currentPage, pageSize);
+                var pagedList = genresListVm.ToPagedList(currentPage, pageSize);
 
                 return View(pagedList);
             }
@@ -50,89 +51,89 @@ namespace Shoes_EF_2024.Web.Controllers
 
         public IActionResult UpSert(int? id)
         {
-            ColorEditVm colorEdVm;
+            GenreEditVm genreVm;
 
             if (id == null || id == 0)
             {
-                colorEdVm = new ColorEditVm();
+                genreVm = new GenreEditVm();
             }
             else
             {
                 try
                 {
-                    var color = _colorService.Get(filter: c => c.ColorId == id);
-                    if (color == null)
+                    var genres = _genresService.Get(filter: c => c.GenreId == id);
+                    if (genres == null)
                     {
                         return NotFound();
                     }
-                    colorEdVm = _mapper.Map<ColorEditVm>(color);
+                    genreVm = _mapper.Map<GenreEditVm>(genres);
                 }
                 catch (Exception)
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving the record.");
                 }
             }
-            return View(colorEdVm);
+            return View(genreVm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult UpSert(ColorEditVm colorVm)
+        public IActionResult UpSert(GenreEditVm genreVm)
         {
             if (!ModelState.IsValid)
             {
-                return View(colorVm);
+                return View(genreVm);
             }
 
             try
             {
-                var color = _mapper.Map<Colors>(colorVm);
+                var genre = _mapper.Map<Genre>(genreVm);
 
-                if (_colorService.Exist(color))
+                if (_genresService.Exist(genre))
                 {
                     ModelState.AddModelError(string.Empty, "Record already exists");
-                    return View(colorVm);
+                    return View(genreVm);
                 }
 
-                _colorService.Save(color);
+                _genresService.Save(genre);
                 TempData["success"] = "Record successfully added/edited";
                 return RedirectToAction("Index");
             }
             catch (Exception)
             {
                 ModelState.AddModelError(string.Empty, "An error occurred while editing the record.");
-                return View(colorVm);
+                return View(genreVm);
             }
         }
 
         [HttpPost]
+        [HttpDelete]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            if (id is null || id == 0)
             {
                 return NotFound();
             }
-
-            var color = _colorService.Get(filter: c => c.ColorId == id);
-            if (color == null)
+            Genre? _genre = _genresService?.Get(filter: s => s.GenreId == id);
+            if (_genre is null)
             {
                 return NotFound();
             }
-
             try
             {
-                if (_colorService.ItsRelated(color.ColorId))
+                if (_genresService!.ItsRelated(_genre.GenreId))
                 {
-                    return Json(new { success = false, message = "Related record... Delete denied!" });
+                    return Json(new { success = false, message = "Related Record... Delete Deny!!" }); ;
                 }
-
-                _colorService.Delete(color);
+                _genresService.Delete(_genre);
                 return Json(new { success = true, message = "Record successfully deleted" });
             }
             catch (Exception)
             {
-                return Json(new { success = false, message = "Couldn't delete the record!" });
+
+                return Json(new { success = false, message = "Couldn't delete record!!! " }); ;
+
             }
         }
 
@@ -143,25 +144,25 @@ namespace Shoes_EF_2024.Web.Controllers
                 return NotFound();
             }
 
-            var color = _colorService.Get(filter: c => c.ColorId == id);
-            if (color == null)
+            var genre = _genresService.Get(filter: c => c.GenreId == id);
+            if (genre == null)
             {
                 return NotFound();
             }
 
             var currentPage = page ?? 1;
             int pageSize = 10;
-            var colorVm = _mapper.Map<ColorDetailsVm>(color);
-            colorVm.ShoesQuantity = _shoesService.GetAll(filter: s => s.ColorID == colorVm.ColorId).Count();
+            var genreVm = _mapper.Map<GenreDetailsVm>(genre);
+            genreVm.ShoesQuantity = _shoesService.GetAll(filter: s => s.GenreId == genreVm.GenreId).Count();
 
             var shoes = _shoesService.GetAll(
                 orderBy: o => o.OrderBy(p => p.Model),
-                filter: p => p.ColorID == colorVm.ColorId,
-                propertiesNames: "Colors");
+                filter: p => p.GenreId == genreVm.GenreId,
+                propertiesNames: "Sports");
 
-            colorVm.Shoes = _mapper.Map<List<ShoeListVm>>(shoes).ToPagedList(currentPage, pageSize);
+            genreVm.Shoes = _mapper.Map<List<ShoeListVm>>(shoes).ToPagedList(currentPage, pageSize);
 
-            return View(colorVm);
+            return View(genreVm);
         }
     }
 }

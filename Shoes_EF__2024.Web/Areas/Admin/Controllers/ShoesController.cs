@@ -9,8 +9,9 @@ using X.PagedList.Extensions;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Shoes_EF_2024.Web.ViewModels;
 
-namespace Shoes_EF_2024.Web.Controllers
+namespace Shoes_EF_2024.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class ShoesController : Controller
     {
         private readonly IServiceShoes? _shoesService;
@@ -287,7 +288,7 @@ namespace Shoes_EF_2024.Web.Controllers
             {
                 if (_shoesService!.ItsRelated(shoe.ShoeId))
                 {
-                    return Json(new { success = false, message = "Related record... Delete denied!" });
+                    return Json(new { warning = false, message = "Related record... Delete denied!" });
                 }
 
                 _shoesService.Delete(shoe);
@@ -295,7 +296,7 @@ namespace Shoes_EF_2024.Web.Controllers
             }
             catch (Exception)
             {
-                return Json(new { success = false, message = "Couldn't delete the record!" });
+                return Json(new { info = false, message = "Couldn't delete the record!" });
             }
         }
     }

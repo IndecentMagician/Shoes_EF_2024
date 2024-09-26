@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shoes_EF_2024.Servicios.Interfaces;
 using Shoes_EF_2024.Servicios.Services;
-using Shoes_EF_2024.Servicios.Servicios;
 using Shoes_EF_2024.Servicios;
 
 

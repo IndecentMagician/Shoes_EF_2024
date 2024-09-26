@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Shoes_EF_2024.Servicios
+namespace Shoes_EF_2024.Servicios.Services
 {
     public class ServiceShoeSize : IServiceShoeSize
     {

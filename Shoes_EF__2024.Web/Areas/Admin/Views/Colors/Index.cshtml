@@ -22,9 +22,9 @@
 @section StikyWapper {
     @Html.Partial("_StickyWapper")
 }
+    @Html.AntiForgeryToken()
 
 <div class="container">
-    @Html.AntiForgeryToken()
     <div class="row mb-3">
         <div class="col-6">
             <h3>Color's' List</h3>
@@ -85,16 +85,15 @@
                 {
                     foreach (var colors in Model)
                     {
-                                    <tr>
+                                        <tr id="@colors.ColorId">
                                         <td class="text-center">@colors.ColorName</td>
                                         <td class="text-center">@colors.shoesQuantity</td>
                                         <td class="text-center">
                                             <a class="btn btn-warning" asp-controller="Colors" asp-action="UpSert" asp-route-id="@colors.ColorId">
                                                 <i class="bi bi-pencil-square"></i>&nbsp; Edit
                                             </a>
-                                            <a onclick="Delete('/Colors/Delete/@colors.ColorId',@colors.ColorId,'@colors.ColorName')" class="btn btn-danger">
-                                                <i class="bi bi-trash-fill"></i> Delete
-                                            </a>
+                                            <a href="#" onclick="Delete('/Colors/Delete/@colors.ColorId', @colors.ColorId, '@colors.ColorName')" class="btn btn-danger">
+                                            <i class="bi bi-trash-fill"></i> Delete</a>
                                         </td>
                                     </tr>
                     }

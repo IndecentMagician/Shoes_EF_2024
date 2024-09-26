@@ -9,27 +9,27 @@ using Shoes_EF_2024.Web.ViewModels.Shoes;
 using Shoes_EF_2024.Web.ViewModels.ShoeSizes;
 using X.PagedList.Extensions;
 
-namespace Shoes_EF_2024.Web.Controllers
+namespace Shoes_EF_2024.Web.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IServiceShoes _shoeService;
 
-        public HomeController(ILogger<HomeController> logger, IServiceShoes shoeService)
+        private readonly IServiceShoes _shoeService;
+        private readonly IMapper _mapper;
+
+        public HomeController(IServiceShoes shoeService, IMapper mapper)
         {
-            _shoeService = shoeService;
-            _logger = logger;
             _shoeService=shoeService;
+            _mapper=mapper;
         }
 
         public IActionResult Index()
         {
-            var shoes = _shoeService.GetAll(); 
-            var topShoes = shoes.Take(5); 
+            var shoes = _shoeService.GetAll();
+            var topShoes = shoes.Take(5);
 
             return View(topShoes);
-            return View();
         }
 
         public IActionResult Privacy()

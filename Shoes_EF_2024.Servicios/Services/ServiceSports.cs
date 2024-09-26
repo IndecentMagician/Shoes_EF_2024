@@ -4,6 +4,7 @@ using Shoes_EF_2024.Entidades;
 using Shoes_EF_2024.Servicios.Interfaces;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+
 namespace Shoes_EF_2024.Servicios.Services
 {
     public class ServiceSports : IServiceSports
@@ -54,16 +55,16 @@ namespace Shoes_EF_2024.Servicios.Services
 
         public void Delete(Sports _sport)
         {
-            var SportsInDb = _context.Sports.Find(_sport.SportId);
-            if (SportsInDb != null)
+            try
             {
-                _context.Sports.Remove(SportsInDb);
-                _context.SaveChanges();
-                Console.WriteLine($"Deporte {SportsInDb.SportName} Eliminado");
+                _unitOfWork.BeginTransaction();
+                _repo.Delete(_sport);
+                _unitOfWork.Commit();
             }
-            else
+            catch (Exception)
             {
-                Console.WriteLine("Deporte no existe");
+                _unitOfWork.Rollback();
+                throw;
             }
         }
 

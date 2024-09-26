@@ -3,7 +3,6 @@ using Shoes_EF_2024.Datos.Interfaces;
 using Shoes_EF_2024.Entidades;
 using Shoes_EF_2024.Servicios.Interfaces;
 using System.Linq.Expressions;
-
 using System.Threading.Tasks;
 
 namespace Shoes_EF_2024.Servicios.Services
@@ -54,18 +53,18 @@ namespace Shoes_EF_2024.Servicios.Services
             }
         }
 
-        public void Delete(Brands brands)
+        public void Delete(Brands brand)
         {
-            var BrandInDb = _context.Brands.Find(brands.BrandId);
-            if (BrandInDb != null)
+            try
             {
-                _context.Brands.Remove(BrandInDb);
-                _context.SaveChanges();
-                Console.WriteLine($"Marca {BrandInDb.BrandName} Eliminada");
+                _unitOfWork.BeginTransaction();
+                _repo.Delete(brand);
+                _unitOfWork.Commit();
             }
-            else
+            catch (Exception)
             {
-                Console.WriteLine("Marca no existe");
+                _unitOfWork.Rollback();
+                throw;
             }
         }
 

@@ -7,8 +7,9 @@ using X.PagedList.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Shoes_EF_2024.Web.Controllers
+namespace Shoes_EF_2024.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class SizesController : Controller
     {
         private readonly IServiceSizes _sizesService;
@@ -130,28 +131,33 @@ namespace Shoes_EF_2024.Web.Controllers
         }
 
         [HttpPost]
+        [HttpDelete]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int? id)
         {
-            var size = _sizesService.Get(s => s.SizeId == id);
-            if (size == null)
+            if (id is null || id == 0)
             {
                 return NotFound();
             }
-
+            Sizes? _size = _sizesService?.Get(filter: s => s.SizeId == id);
+            if (_size is null)
+            {
+                return NotFound();
+            }
             try
             {
-                if (_sizesService.ItsRelated(size.SizeId))
+                if (_sizesService!.ItsRelated(_size.SizeId))
                 {
-                    return Json(new { success = false, message = "Related record... Delete denied!" });
+                    return Json(new { success = false, message = "Related Record... Delete Deny!!" }); ;
                 }
-
-                _sizesService.Delete(size);
-                return Json(new { success = true, message = "Size successfully deleted." });
+                _sizesService.Delete(_size);
+                return Json(new { success = true, message = "Record successfully deleted" });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(new { success = false, message = "Couldn't delete the size!" });
+
+                return Json(new { success = false, message = "Couldn't delete record!!! " }); ;
+
             }
         }
     }

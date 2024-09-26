@@ -24,9 +24,8 @@
 @section StikyWapper {
     @Html.Partial("_StickyWapper")
 }
-
+@Html.AntiForgeryToken()
 <div class="container">
-    @Html.AntiForgeryToken()
     <div class="row mb-3">
         <div class="col-6">
             <h3>Sport's' List</h3>
@@ -74,50 +73,48 @@
         </div>
     </form>
     <div class="table-responsive">
-    <table class="table tournament-table">
-        <thead>
-            <tr>
-                <th style="width:33%">Sport Name</th>
-                <th style="width:33%">Prod.Qty</th>
-                <th style="width:33%">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-                @if (Model.Any())
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sport Name</th>
+            <th>Shoes Quantity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+                @foreach (var sport in Model)  
                 {
-                    foreach (var sports in Model)
-                    {
-                                            <tr>
-                                                <td class="text-center">@sports.SportName</td>
-                                                <td class="text-center">@sports.shoesQuantity</td>
-                                                <td class="text-center">
-                                                <a class="btn btn-warning" asp-controller="Sports" asp-action="UpSert" asp-route-id="@sports.SportId">
-                                                    <i class="bi bi-pencil-square"></i>&nbsp;Edit</a>
-                                    <a onclick="Delete('/Sports/Delete/@sports.SportId',@sports.SportId,'@sports.SportName')" class="btn btn-danger">
-                                        <i class="bi bi-trash-fill"></i>Delete</a>
-                                        </td>
-                                            </tr>
-                    }
+                <tr id="@sport.SportId">
+                    <td>@sport.SportName</td>
+                    <td>@sport.shoesQuantity</td>
+                    <td>
+                            <a class="btn btn-warning" asp-controller="Sports" asp-action="UpSert" asp-route-id="@sport.SportId">
+                                                        <i class="bi bi-pencil-square"></i>&nbsp;Edit</a>
+                        <a href="#" onclick="Delete('/Sports/Delete/@sport.SportId', @sport.SportId, '@sport.SportName')" class="btn btn-danger">
+                            <i class="bi bi-trash-fill"></i> Delete
+                        </a>
+                    </td>
+                </tr>
                 }
-                else
-                {
-                            <tr>
-                                <td colspan="3" class="text-center">
-                                    No Sports have been added yet!
-                                </td>
-                            </tr>
-                }
-        </tbody>
-    </table>
+    </tbody>
+</table>
     <partial name="_Pager" model="@Model" />
     </div>
 </div>
-<!-- Incluir la sección de Footer -->
+
 @section Footer {
     @Html.Partial("_Footer")
 }
 
-<!-- Incluir scripts adicionales si es necesario -->
+
 @section Scripts {
-    @Html.Partial("_Scripts")
+                        <script src="~/js/common.js"></script>
+                       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="~/lib/jquery/dist/jquery.js"></script>
+                   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+                 <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
+                <script src="assets/js/app.min.js"></script>
+                <script src="assets/js/main.js"></script>
+
+
 }

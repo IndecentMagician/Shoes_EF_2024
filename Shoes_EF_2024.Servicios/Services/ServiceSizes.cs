@@ -5,7 +5,7 @@ using Shoes_EF_2024.Servicios.Interfaces;
 using System.Drawing;
 using System.Linq.Expressions;
 
-namespace Shoes_EF_2024.Servicios.Servicios
+namespace Shoes_EF_2024.Servicios.Services
 {
     public class ServiceSizes : IServiceSizes
     {

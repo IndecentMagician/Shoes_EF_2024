@@ -26,7 +26,7 @@ namespace Shoes_EF_2024.Datos.Repositorios
 
         public bool ItsRelated(int id)
         {
-            return _db.Sizes.Any(s => s.SizeId == id);
+            return _db.ShoeSizes.Any(s => s.SizeId == id);
         }
 
         public void Update(Sizes size)

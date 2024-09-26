@@ -57,6 +57,18 @@ namespace Shoes_EF_2024.Mapping
                 }).ToList()))
                 .ForMember(dest => dest.Suspended, opt => opt.MapFrom(src => src.Suspended))
                 .ForMember(dest => dest.NumberOfSizes, opt => opt.MapFrom(src => src.ShoeSizes.Count));
+
+            CreateMap<Shoes, ShoeHomeIndexVm>()
+                .ForMember(dest => dest.ShoeId, opt => opt.MapFrom(src => src.ShoeId))
+                .ForMember(dest => dest.Model, opt => opt.MapFrom(src => src.Model))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
+                .ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.Brand != null ? src.Brand.BrandName : string.Empty))
+                .ForMember(dest => dest.SportName, opt => opt.MapFrom(src => src.Sport != null ? src.Sport.SportName : string.Empty))
+                .ForMember(dest => dest.GenreName, opt => opt.MapFrom(src => src.Genre != null ? src.Genre.GenreName : string.Empty))
+                .ForMember(dest => dest.ColorName, opt => opt.MapFrom(src => src.Color != null ? src.Color.ColorName : string.Empty))
+                .ForMember(dest => dest.ListPrice, opt => opt.MapFrom(src => src.UnitPrice))
+                .ForMember(dest => dest.CashPrice, opt => opt.MapFrom(src => src.UnitPrice*0.9m));
         }
 
 

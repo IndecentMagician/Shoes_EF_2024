@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.5" />
     <PackageReference Include="X.Web.PagedList" Version="10.1.2" />
   </ItemGroup>
 
@@ -15,6 +16,10 @@
     <ProjectReference Include="..\Shoes_EF_2024.Entidades\Shoes_EF_2024.Entidades.csproj" />
     <ProjectReference Include="..\Shoes_EF_2024.loc\Shoes_EF_2024.loc.csproj" />
     <ProjectReference Include="..\Shoes_EF_2024.Servicios\Shoes_EF_2024.Servicios.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 

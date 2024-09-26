@@ -9,8 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shoes_EF_2024.Web.Controllers
+namespace Shoes_EF_2024.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class ShoeSizesController : Controller
     {
         private readonly IServiceShoeSize? _shoeSizeService;
@@ -33,7 +34,7 @@ namespace Shoes_EF_2024.Web.Controllers
         {
             try
             {
-                var shoeSizes = _shoeSizeService?.GetAll(); 
+                var shoeSizes = _shoeSizeService?.GetAll();
                 var shoeSizesVm = _mapper?.Map<List<ShoeSizeListVm>>(shoeSizes);
                 return View(shoeSizesVm);
             }
@@ -111,6 +112,7 @@ namespace Shoes_EF_2024.Web.Controllers
             }
         }
 
+        [HttpPost]
         [HttpDelete]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int? shoeId, int? sizeId)

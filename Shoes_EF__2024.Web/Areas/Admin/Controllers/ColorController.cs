@@ -6,19 +6,20 @@ using X.PagedList;
 using Shoes_EF_2024.Web.ViewModels.Shoes;
 using Microsoft.AspNetCore.Http;
 using X.PagedList.Extensions;
-using Shoes_EF_2024.Web.ViewModels.Sports;
+using Shoes_EF_2024.Web.ViewModels.Colors;
 
-namespace Shoes_EF_2024.Web.Controllers
+namespace Shoes_EF_2024.Web.Areas.Admin.Controllers
 {
-    public class SportsController : Controller
+    [Area("Admin")]
+    public class ColorsController : Controller
     {
-        private readonly IServiceSports _sportService;
+        private readonly IServiceColors _colorService;
         private readonly IServiceShoes _shoesService;
         private readonly IMapper _mapper;
 
-        public SportsController(IServiceSports sportsService, IServiceShoes shoesService, IMapper mapper)
+        public ColorsController(IServiceColors colorService, IServiceShoes shoesService, IMapper mapper)
         {
-            _sportService = sportsService ?? throw new ApplicationException("Dependencies not set");
+            _colorService = colorService ?? throw new ApplicationException("Dependencies not set");
             _shoesService = shoesService ?? throw new ApplicationException("Dependencies not set");
             _mapper = mapper ?? throw new ApplicationException("Dependencies not set");
         }
@@ -29,16 +30,16 @@ namespace Shoes_EF_2024.Web.Controllers
             {
                 var currentPage = page ?? 1;
 
-                var sports = _sportService.GetAll();
+                var colorList = _colorService.GetAll();
 
-                var sportsListVm = sports.Select(b => new SportListVm
+                var colorsListVm = colorList.Select(b => new ColorlistVm
                 {
-                    SportId = b.SportId,
-                    SportName = b.SportName,
-                    shoesQuantity = _shoesService.GetAll(filter: s => s.SportId == b.SportId).Count()
+                    ColorId = b.ColorId,
+                    ColorName = b.ColorName,
+                    shoesQuantity = _shoesService.GetAll(filter: s => s.ColorID == b.ColorId).Count()
                 }).ToList();
 
-                var pagedList = sportsListVm.ToPagedList(currentPage, pageSize);
+                var pagedList = colorsListVm.ToPagedList(currentPage, pageSize);
 
                 return View(pagedList);
             }
@@ -50,89 +51,89 @@ namespace Shoes_EF_2024.Web.Controllers
 
         public IActionResult UpSert(int? id)
         {
-            SportEditVm sportVm;
+            ColorEditVm colorEdVm;
 
             if (id == null || id == 0)
             {
-                sportVm = new SportEditVm();
+                colorEdVm = new ColorEditVm();
             }
             else
             {
                 try
                 {
-                    var sport = _sportService.Get(filter: c => c.SportId == id);
-                    if (sport == null)
+                    var color = _colorService.Get(filter: c => c.ColorId == id);
+                    if (color == null)
                     {
                         return NotFound();
                     }
-                    sportVm = _mapper.Map<SportEditVm>(sport);
+                    colorEdVm = _mapper.Map<ColorEditVm>(color);
                 }
                 catch (Exception)
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving the record.");
                 }
             }
-            return View(sportVm);
+            return View(colorEdVm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult UpSert(SportEditVm sportVm)
+        public IActionResult UpSert(ColorEditVm colorVm)
         {
             if (!ModelState.IsValid)
             {
-                return View(sportVm);
+                return View(colorVm);
             }
 
             try
             {
-                var sport = _mapper.Map<Sports>(sportVm);
+                var color = _mapper.Map<Colors>(colorVm);
 
-                if (_sportService.Exist(sport))
+                if (_colorService.Exist(color))
                 {
                     ModelState.AddModelError(string.Empty, "Record already exists");
-                    return View(sportVm);
+                    return View(colorVm);
                 }
 
-                _sportService.Save(sport);
+                _colorService.Save(color);
                 TempData["success"] = "Record successfully added/edited";
                 return RedirectToAction("Index");
             }
             catch (Exception)
             {
                 ModelState.AddModelError(string.Empty, "An error occurred while editing the record.");
-                return View(sportVm);
+                return View(colorVm);
             }
         }
 
         [HttpPost]
+        [HttpDelete]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            if (id is null || id == 0)
             {
                 return NotFound();
             }
-
-            var sport = _sportService.Get(filter: c => c.SportId == id);
-            if (sport == null)
+            Colors? _color = _colorService?.Get(filter: s => s.ColorId == id);
+            if (_color is null)
             {
                 return NotFound();
             }
-
             try
             {
-                if (_sportService.ItsRelated(sport.SportId))
+                if (_colorService!.ItsRelated(_color.ColorId))
                 {
-                    return Json(new { success = false, message = "Related record... Delete denied!" });
+                    return Json(new { success = false, message = "Related Record... Delete Deny!!" }); ;
                 }
-
-                _sportService.Delete(sport);
+                _colorService.Delete(_color);
                 return Json(new { success = true, message = "Record successfully deleted" });
             }
             catch (Exception)
             {
-                return Json(new { success = false, message = "Couldn't delete the record!" });
+
+                return Json(new { success = false, message = "Couldn't delete record!!! " }); ;
+
             }
         }
 
@@ -143,25 +144,25 @@ namespace Shoes_EF_2024.Web.Controllers
                 return NotFound();
             }
 
-            var sport = _sportService.Get(filter: c => c.SportId == id);
-            if (sport == null)
+            var color = _colorService.Get(filter: c => c.ColorId == id);
+            if (color == null)
             {
                 return NotFound();
             }
 
             var currentPage = page ?? 1;
             int pageSize = 10;
-            var sportVm = _mapper.Map<SportDetailsVm>(sport);
-            sportVm.ShoesQuantity = _shoesService.GetAll(filter: s => s.SportId == sportVm.SportId).Count();
+            var colorVm = _mapper.Map<ColorDetailsVm>(color);
+            colorVm.ShoesQuantity = _shoesService.GetAll(filter: s => s.ColorID == colorVm.ColorId).Count();
 
             var shoes = _shoesService.GetAll(
                 orderBy: o => o.OrderBy(p => p.Model),
-                filter: p => p.SportId == sportVm.SportId,
-                propertiesNames: "Sports");
+                filter: p => p.ColorID == colorVm.ColorId,
+                propertiesNames: "Colors");
 
-            sportVm.Shoes = _mapper.Map<List<ShoeListVm>>(shoes).ToPagedList(currentPage, pageSize);
+            colorVm.Shoes = _mapper.Map<List<ShoeListVm>>(shoes).ToPagedList(currentPage, pageSize);
 
-            return View(sportVm);
+            return View(colorVm);
         }
     }
 }

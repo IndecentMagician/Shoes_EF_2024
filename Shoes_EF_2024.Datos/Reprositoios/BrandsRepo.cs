@@ -29,7 +29,7 @@ namespace Shoes_EF_2024.Datos.Repositorios
 
         public bool ItsRelated(int id)
         {
-            return _db.Brands.Any(p => p.BrandId == id);
+            return _db.Shoes.Any(p => p.BrandId == id);
         }
 
         public void Update(Brands brand)
