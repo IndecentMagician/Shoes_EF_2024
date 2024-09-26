@@ -16,19 +16,19 @@
                                         </li>
                                         <li><a href="about.html">ABOUT US</a></li>
                                         <li class="menu-item-has-children">
-                                            <a href="@Url.Action("Index", "Brands")">Brands</a>
+                                            <a href="@Url.Action("Index", "Brands", new { area = "Admin" })">Brands</a>
                                         </li>
                                         <li class="menu-item-has-children">
-                                        <a asp-area="" asp-controller="Sports" asp-action="Index">Sports</a>
+                                        <a asp-area="Admin" asp-controller="Sports" asp-action="Index">Sports</a>
                                         </li>
                                         <li class="menu-item-has-children">
-                                            <a asp-area="" asp-controller="Shoes" asp-action="Index">Shoes</a>
+                                            <a asp-area="Admin" asp-controller="Shoes" asp-action="Index">Shoes</a>
                                         </li>
                                         <li class="menu-item-has-children">
-                                        <a asp-area="" asp-controller="Colors" asp-action="Index">Colors</a>
+                                        <a asp-area="Admin" asp-controller="Colors" asp-action="Index">Colors</a>
                                         </li>
                                         <li class="menu-item-has-children">
-                                            <a href="@Url.Action("Index", "Genres")">Genre</a>
+                                            <a href="@Url.Action("Index", "Genres", new { area = "Admin" })">Genre</a>
                                         </li>
                                         <li><a href="contact.html">CONTACT</a></li>
                                     </ul>

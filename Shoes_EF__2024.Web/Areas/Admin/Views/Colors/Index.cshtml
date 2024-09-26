@@ -7,21 +7,6 @@
     ViewData["Title"] = "Color List";
 }
 
-@section Header {
-    @Html.Partial("_Header")
-}
-@section ColorSwitcher {
-    @Html.Partial("_ColorSwitcher")
-}
-@section SearchBox {
-    @Html.Partial("_SearchBox")
-}
-@section SideBox {
-    @Html.Partial("_SideBox")
-}
-@section StikyWapper {
-    @Html.Partial("_StickyWapper")
-}
     @Html.AntiForgeryToken()
 
 <div class="container">
@@ -112,9 +97,6 @@
     </div>
 </div>
 
-@section Footer {
-    @Html.Partial("_Footer")
-}
 
 @section Scripts {
             <script src="~/lib/jquery/dist/jquery.js"></script>

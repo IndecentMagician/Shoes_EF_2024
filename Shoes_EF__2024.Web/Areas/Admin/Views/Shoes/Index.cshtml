@@ -9,21 +9,6 @@
     ViewData["Title"] = "Shoes List";
 }
 
-@section Header {
-    @Html.Partial("_Header")
-}
-@section ColorSwitcher {
-    @Html.Partial("_ColorSwitcher")
-}
-@section SearchBox {
-    @Html.Partial("_SearchBox")
-}
-@section SideBox {
-    @Html.Partial("_SideBox")
-}
-@section StikyWapper {
-    @Html.Partial("_StickyWapper")
-}
 
 <div class="container">
     @Html.AntiForgeryToken()
@@ -159,19 +144,8 @@
     <partial name="_Pager" model="@Model.Shoes" />
 
 
-</div>
-<!-- Incluir la sección de Footer -->
-@section Footer {
-    @Html.Partial("_Footer")
-}
 
 <!-- Incluir scripts adicionales si es necesario -->
 @section Scripts {
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-            <script src="~/js/common.js"></script>
-            <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
-            <script src="assets/js/app.min.js"></script>
-            <script src="assets/js/main.js"></script>
-            <partial name="_ValidationScriptsPartial" />
+    @Html.Partial("_Scripts")
 }
